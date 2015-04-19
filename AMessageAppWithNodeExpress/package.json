@@ -1,0 +1,19 @@
+{
+  "name": "AMessageAppWithNodeExpress",
+  "version": "0.0.0",
+  "description": "AMessageAppWithNodeExpress",
+  "main": "app.js",
+    "author": {
+        "name": "liusi",
+        "email": ""
+    },
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "3.4.4",
+    "ejs": "*",
+    "bcrypt": "0.7.3",
+    "redis": "0.7.2"
+  }
+}
