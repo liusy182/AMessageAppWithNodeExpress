@@ -31,14 +31,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="lib\messages.js" />
     <Compile Include="lib\user.js" />
     <Compile Include="routes\index.js" />
+    <Compile Include="routes\register.js" />
     <Compile Include="routes\user.js" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
+    <Content Include="views\messages.ejs" />
+    <Content Include="views\register.ejs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib\" />

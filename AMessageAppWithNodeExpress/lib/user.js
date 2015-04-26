@@ -11,6 +11,7 @@ function User(obj) {
 User.prototype.save = function (fn) {
   if (this.id) {
     // if user already has a id, update it
+    this.update(fn);
   } else {
     var user = this;
     // increment the id if it is a new user
@@ -82,20 +83,21 @@ User.authenticate = function (name, pass, fn) {
   });
 };
 
-var tobi = new User(
-  {
-    name: 'Tobi',
-    pass: 'im a ferret',
-    age:'2'
-});
+//test code
+//var tobi = new User(
+//  {
+//    name: 'Tobi',
+//    pass: 'im a ferret',
+//    age:'2'
+//});
 
-tobi.save(function (err) {
-  if (err) {
-    console.log(err);
-    throw err;
-  }
-  console.log('user id %d', tobi.id);
-});
+//tobi.save(function (err) {
+//  if (err) {
+//    console.log(err);
+//    throw err;
+//  }
+//  console.log('user id %d', tobi.id);
+//});
 
 
 module.exports = User;
