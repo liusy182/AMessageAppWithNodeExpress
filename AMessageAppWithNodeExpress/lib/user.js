@@ -11,7 +11,6 @@ function User(obj) {
 User.prototype.save = function (fn) {
   if (this.id) {
     // if user already has a id, update it
-    this.Update(fn);
   } else {
     var user = this;
     // increment the id if it is a new user
@@ -39,10 +38,10 @@ User.prototype.update = function (fn) {
   });
 };
 
-User.prototype.hasPassword = function (fn) {
+User.prototype.hashPassword = function (fn) {
   var user = this;
   // 12 means that we want a salk with 12 characters
-  bcrypt.genSalt(12, function (err, salk) {
+  bcrypt.genSalt(12, function (err, salt) {
     if (err) return fn(err);
     user.salt = salt;
     bcrypt.hash(user.pass, salt, function (err, hash) {
@@ -52,5 +51,51 @@ User.prototype.hasPassword = function (fn) {
     });
   });
 };
+
+User.getByName = function (name, fn) {
+  User.getId(name, function (err, id) {
+    if (err) return fn(err);
+    User.get(id, fn);
+  });
+};
+
+User.getId = function (name, fn) {
+  db.get('user:id:' + name, fn);
+};
+
+User.get = function (id, fn) {
+  db.hgetall('user:' + id, function (err, user) {
+    if (err) return fn(err);
+    console.log(user);
+    fn(null, new User(user));
+  });
+};
+
+User.authenticate = function (name, pass, fn) {
+  User.getByName(name, function (err, user) {
+    if (err) return fn(err);
+    if (!user.id) return fn();
+    bcrypt.hash(pass, user.salt, function (err, hash) {
+      if (err) return fn(err);
+      if (hash == user.pass) return fn(null, user);
+    });
+  });
+};
+
+var tobi = new User(
+  {
+    name: 'Tobi',
+    pass: 'im a ferret',
+    age:'2'
+});
+
+tobi.save(function (err) {
+  if (err) {
+    console.log(err);
+    throw err;
+  }
+  console.log('user id %d', tobi.id);
+});
+
 
 module.exports = User;

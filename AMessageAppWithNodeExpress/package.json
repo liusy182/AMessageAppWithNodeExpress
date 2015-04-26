@@ -13,7 +13,7 @@
   "dependencies": {
     "express": "3.4.4",
     "ejs": "*",
-    "bcrypt": "^0.7.3",
+    "bcrypt": "*",
     "redis": "0.7.2"
   }
 }
