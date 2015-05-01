@@ -26,14 +26,16 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.cookieParser('your secret here'));
-app.use(express.session());
+app.use(express.cookieParser());
+app.use(express.session({ secret: '1234567890QWERTY' }));
 
 //use our own middlewares
-app.use(user);
 app.use(messages);
+app.use(user);
+
+app.use(app.router); //router has to be placed after session in order for session to work
+
 
 
 // development only
@@ -41,11 +43,11 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+app.get('/', login.form);
 
 //user registration
-app.get('/register', user.form);
-app.post('/register', user.submit());
+app.get('/register', register.form);
+app.post('/register', register.submit);
 
 //login logout
 app.get('/login', login.form);
