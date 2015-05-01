@@ -3,17 +3,17 @@
   "version": "0.0.0",
   "description": "AMessageAppWithNodeExpress",
   "main": "app.js",
-    "author": {
-        "name": "liusi",
-        "email": ""
-    },
+  "author": {
+    "name": "liusi",
+    "email": ""
+  },
   "scripts": {
     "start": "node app"
   },
   "dependencies": {
-    "express": "3.4.4",
-    "ejs": "*",
     "bcrypt": "*",
+    "ejs": "*",
+    "express": "3.4.4",
     "redis": "0.7.2"
   }
 }

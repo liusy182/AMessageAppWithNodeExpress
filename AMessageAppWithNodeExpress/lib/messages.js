@@ -1,4 +1,6 @@
-﻿var express = require('express');
+﻿'use strict';
+
+var express = require('express');
 var res = express.response;
 
 //extend express.response to accept a message in session
