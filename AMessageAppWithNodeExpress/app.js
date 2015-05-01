@@ -17,6 +17,8 @@ var entries = require('./routes/entries');
 var messages = require('./lib/messages');
 var validate = require('./lib/middleware/validate');
 var user = require('./lib/middleware/user');
+var page = require('./lib/middleware/page');
+var Entry = require('./lib/entry');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -37,18 +39,19 @@ app.use(user);
 
 app.use(app.router); //router has to be placed after session in order for session to work
 
-
 // development only
 if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-app.get('/', entries.list);
+app.get('/', login.form);
+
+app.get('/viewpost', page(Entry.count, 3), entries.list);
 app.get('/post', entries.form);
 //app.post('/post', entries.submit);
 app.post('/post',
   validate.required('entry[title]'),
-  validate.lengthAbove('entry[title]', 4),
+  validate.lengthAbove('entry[title]', 3),
   entries.submit);
 
 //user registration

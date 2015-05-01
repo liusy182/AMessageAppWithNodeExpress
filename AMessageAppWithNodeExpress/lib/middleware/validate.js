@@ -21,7 +21,7 @@ exports.required = function (field) {
     if (getField(req, field)) {
       next();
     } else {
-      res.error(field.join(' ') + ' is required')
+      res.error(field.join(' ') + ' is required');
       res.redirect('back');
     }
   };
