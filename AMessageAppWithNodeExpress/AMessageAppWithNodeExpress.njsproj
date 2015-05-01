@@ -32,6 +32,7 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="lib\messages.js" />
+    <Compile Include="lib\middleware\user.js" />
     <Compile Include="lib\user.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\register.js" />
@@ -46,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="lib\" />
+    <Folder Include="lib\middleware\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
