@@ -1,4 +1,6 @@
-﻿var redis = require('redis');
+﻿'use strict';
+
+var redis = require('redis');
 var bcrypt = require('bcrypt');
 var db = redis.createClient();
 

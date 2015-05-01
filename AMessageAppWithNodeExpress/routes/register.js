@@ -1,4 +1,6 @@
-﻿var User = require('../lib/user.js');
+﻿'use strict';
+
+var User = require('../lib/user.js');
 
 exports.form = function (req, res) {
   res.render('register', { title: 'Register' });

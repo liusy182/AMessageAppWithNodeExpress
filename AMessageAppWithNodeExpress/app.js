@@ -4,14 +4,18 @@
  */
 
 var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
-var register = require('./routes/register');
 var messages = require('./lib/messages');
-var login = require('./routes/login');
 var http = require('http');
 var path = require('path');
 var app = express();
+
+//import routers here
+var routes = require('./routes');
+var register = require('./routes/register');
+var login = require('./routes/login');
+
+//customized middlewares
+var user = require('./lib/middleware/user');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -24,9 +28,11 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(express.cookieParser('your secret here'));
 app.use(express.session());
+
+//use our own middlewares
+app.use(user);
 app.use(messages);
 
 
@@ -37,14 +43,15 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 
+//user registration
 app.get('/register', user.form);
 app.post('/register', user.submit());
 
-app.get('/users', user.list);
-
+//login logout
 app.get('/login', login.form);
 app.post('/login', login.submit);
 app.get('/logout', login.logout);
+
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
