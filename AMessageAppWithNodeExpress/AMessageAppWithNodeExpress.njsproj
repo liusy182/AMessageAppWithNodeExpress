@@ -35,6 +35,7 @@
     <Compile Include="lib\messages.js" />
     <Compile Include="lib\middleware\user.js" />
     <Compile Include="lib\user.js" />
+    <Compile Include="lib\middleware\validate.js" />
     <Compile Include="routes\entries.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\login.js" />

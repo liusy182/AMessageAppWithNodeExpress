@@ -3,18 +3,19 @@
  * Module dependencies.
  */
 var express = require('express');
-var messages = require('./lib/messages');
 var http = require('http');
 var path = require('path');
 var app = express();
 
-//import routers here
+// routers
 var routes = require('./routes');
 var register = require('./routes/register');
 var login = require('./routes/login');
 var entries = require('./routes/entries');
 
 //customized middlewares
+var messages = require('./lib/messages');
+var validate = require('./lib/middleware/validate');
 var user = require('./lib/middleware/user');
 
 // all environments
@@ -44,7 +45,11 @@ if ('development' == app.get('env')) {
 
 app.get('/', entries.list);
 app.get('/post', entries.form);
-app.post('/post', entries.submit);
+//app.post('/post', entries.submit);
+app.post('/post',
+  validate.required('entry[title]'),
+  validate.lengthAbove('entry[title]', 4),
+  entries.submit);
 
 //user registration
 app.get('/register', register.form);
