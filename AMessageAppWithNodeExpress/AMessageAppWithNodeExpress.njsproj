@@ -31,9 +31,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="lib\entry.js" />
     <Compile Include="lib\messages.js" />
     <Compile Include="lib\middleware\user.js" />
     <Compile Include="lib\user.js" />
+    <Compile Include="routes\entries.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\login.js" />
     <Compile Include="routes\register.js" />
@@ -41,6 +43,8 @@
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.css" />
     <Content Include="README.md" />
+    <Content Include="views\post.ejs" />
+    <Content Include="views\entries.ejs" />
     <Content Include="views\login.ejs" />
     <Content Include="views\menu.ejs" />
     <Content Include="views\messages.ejs" />

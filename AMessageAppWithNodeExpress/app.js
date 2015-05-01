@@ -1,8 +1,7 @@
-﻿
+﻿'use strict';
 /**
  * Module dependencies.
  */
-
 var express = require('express');
 var messages = require('./lib/messages');
 var http = require('http');
@@ -13,6 +12,7 @@ var app = express();
 var routes = require('./routes');
 var register = require('./routes/register');
 var login = require('./routes/login');
+var entries = require('./routes/entries');
 
 //customized middlewares
 var user = require('./lib/middleware/user');
@@ -37,13 +37,14 @@ app.use(user);
 app.use(app.router); //router has to be placed after session in order for session to work
 
 
-
 // development only
 if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-app.get('/', login.form);
+app.get('/', entries.list);
+app.get('/post', entries.form);
+app.post('/post', entries.submit);
 
 //user registration
 app.get('/register', register.form);
