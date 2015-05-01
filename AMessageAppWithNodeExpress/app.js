@@ -34,6 +34,7 @@ app.use(express.cookieParser());
 app.use(express.session({ secret: '1234567890QWERTY' }));
 
 //use our own middlewares
+app.use('/api', api.auth);
 app.use(messages);
 app.use(user);
 
@@ -63,6 +64,9 @@ app.get('/login', login.form);
 app.post('/login', login.submit);
 app.get('/logout', login.logout);
 
+// api
+app.get('/api/user/:id', api.user);
+app.post('/api/entry', entries.submit);
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));

@@ -85,21 +85,11 @@ User.authenticate = function (name, pass, fn) {
   });
 };
 
-//test code
-//var tobi = new User(
-//  {
-//    name: 'Tobi',
-//    pass: 'im a ferret',
-//    age:'2'
-//});
-
-//tobi.save(function (err) {
-//  if (err) {
-//    console.log(err);
-//    throw err;
-//  }
-//  console.log('user id %d', tobi.id);
-//});
-
+User.prototype.toJSON = function () {
+  return {
+    id: this.id,
+    name: this.name
+  }
+};
 
 module.exports = User;

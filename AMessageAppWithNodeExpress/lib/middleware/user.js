@@ -4,6 +4,9 @@
 var User = require('../user');
 
 module.exports = function (req, res, next) {
+  if (req.remoteUser) {
+    res.locals.user = req.remoteUser; //  basicAuth module stores data in remoteUser
+  }
   var uid = req.session.uid; // attempt to get logged in use id from session
   if (!uid) return next();
   User.get(uid, function (err, user) { // get from redis if not found in session
